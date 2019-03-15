@@ -1,4 +1,5 @@
-var TaskList = function(done, title) {
-    this.done = new Boolean(done);
+function TaskList(title) {
+    this.tasks = [];
+    this.id = null;
     this.title = title;
 }

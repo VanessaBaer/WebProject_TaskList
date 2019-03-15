@@ -1,3 +1,4 @@
-var Task = function (title) {
-    this.title = title;
+function Task(done, title) {
+    this.done = false;
+    this.title = title || "";
 }
