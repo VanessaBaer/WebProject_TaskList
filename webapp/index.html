@@ -2,14 +2,21 @@
 <html lang="de">
 <head>
     <title>TODOs</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="js/Task.js"></script>
     <script type="text/javascript" src="js/TaskList.js"></script>
 </head>
 <body>
-<div>
+<div id="centered">
     <h1>To-Do-Liste</h1>
+    <div id="tasks"></div>
+    <div id="footer">
+        <button type="button" class="btn btn-lg btn-primary">Neuer Task</button>
+        <button type="button" class="btn btn-lg btn-primary">Tasks speichern</button>
+        <a href="SpecRunner.html" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Testen</a>
+    </div>
 </div>
 </body>
 </html>
