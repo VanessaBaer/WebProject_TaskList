@@ -1,6 +1,7 @@
 
 beforeEach(() => {
-    task = new Task(false,"task");
+    task = new Task("task");
+    task.done = false;
 });
 
 describe("Define done", () => {
@@ -10,7 +11,8 @@ describe("Define done", () => {
     });
 
     it("Define done true, true == true", () => {
-        task3 = new Task(true, "task3");
+        task3 = new Task("task3");
+        task3.done = true;
         expect(true).toBe(true);
     });
 
@@ -32,28 +34,47 @@ describe("Initial object", () => {
     });
 
 
-    describe("render", function() {
-        it("renders an li element", function() {
+    describe("render", () => {
+        it("renders an li element", () => {
             var $markup = task.render();
             expect($markup).toEqual('li');
         });
-        it("renders an unchecked checkbox", function() {
+        it("renders an unchecked checkbox", () => {
             var $markup = task.render();
             expect($markup.find('input[name=done]')).not.toBeChecked();
         });
-        it("renders an empty input field", function() {
+        it("renders an empty input field", () => {
             var $markup = task.render();
             expect($markup.find('input[name=title]')).toHaveValue('')
         });
-        it("checks the checkbox when done", function() {
+        it("checks the checkbox when done", () => {
             task.done = true;
             var $markup = task.render();
             expect($markup.find('input[name=done]')).toBeChecked();
         });
-        it("renders an the title", function() {
-            task.title = 'task title';
+        it("renders an the title", () => {
             var $markup = task.render();
-            expect($markup.find('input[name=title]')).toHaveValue('task title');
+            expect($markup.find('input[name=title]')).toHaveValue('title');
+        });
+    });
+
+    describe("syncs the model with its markup", function() {
+        var $markup;
+        beforeEach(function() {
+            $markup = task.render();
+        });
+        it('adds itself as data to the markup', function() {
+            expect($markup.data('task')).toEqual(task);
+        });
+        it('syncs the title value', function() {
+            // change value of title input and fire an change event
+            $markup.find('input[name=title]').val('changed title').change();
+            expect(task.title).toEqual('changed title');
+        });
+        it('syncs the done value', function() {
+            // change value of done checkbox and fire an change event
+            $markup.find('input[name=done]').prop('checked', true).change();
+            expect(task.done).toEqual(true);
         });
     });
 
