@@ -14,6 +14,9 @@ TaskList.prototype.createTask = function(title) {
     return _task;
 };
 
+TaskList.prototype.save = function () {
+};
+
 TaskList.prototype.render = function() {
     var $tasks = [];
     for (var i = 0; i < this.tasks.length; i++) {

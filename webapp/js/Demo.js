@@ -17,6 +17,9 @@ $(function() {
                 $('#tasks ul').append(task.render());
         });
 
+        $('#saveTasks').click(function(event) {
+                taskList.save();
+        });
 
         $('#tasks').append(taskList.render());
 
