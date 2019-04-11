@@ -9,12 +9,14 @@ Task.prototype.render = function() {
         type: 'checkbox',
         checked: this.done
     });
+    if (this.done) {
+        $done.attr('checked', 'checked');
+    }
 
-    var $title = $('<input>', {
+    var $title = $('<input class="form-control">', {
         name: 'title',
         type: 'text'
     }).val(this.title);
 
-    return $('<li>').append([$done, $title]);
-
+    return $('<div class="input-group-text">').append([$done],[$title]);
 };

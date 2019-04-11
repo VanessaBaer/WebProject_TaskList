@@ -14,12 +14,11 @@ TaskList.prototype.createTask = function(title) {
     return _task;
 };
 
-
 TaskList.prototype.render = function() {
     var $tasks = [];
-    $.each(this.tasks, function (index, task) {
-        $tasks.push(task.render());
-    });
+    for (var i = 0; i < this.tasks.length; i++) {
+        $tasks.push(this.tasks[i].render());
+    }
 
     return $('<ul>').append($tasks);
 };

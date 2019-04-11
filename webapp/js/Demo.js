@@ -9,6 +9,20 @@ $(function() {
         taskList.createTask("Buy milk");
         taskList.createTask("Read recipe");
         taskList.createTask("Invite guests");
-        $('#tasks').html(taskList.render());
+        taskList.tasks[0].done = true;
+
+        $('#newTask').click(function(event) {
+                event.preventDefault();
+                var task = taskList.createTask('');
+                $('#tasks ul').append(task.render());
+        });
+
+
+        $('#tasks').append(taskList.render());
+
+        $(':checkbox').on('change', function() {
+                // all related code goes in here
+                console.log('change event triggered');
+        });
 
 });

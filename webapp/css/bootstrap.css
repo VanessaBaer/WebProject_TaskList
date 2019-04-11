@@ -3517,6 +3517,7 @@ input[type="button"].btn-block {
 }
 
 .input-group-text {
+  margin: 10px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -3536,7 +3537,7 @@ input[type="button"].btn-block {
 
 .input-group-text input[type="radio"],
 .input-group-text input[type="checkbox"] {
-  margin-top: 0;
+  margin: 10px;
 }
 
 .input-group-lg > .form-control:not(textarea),
