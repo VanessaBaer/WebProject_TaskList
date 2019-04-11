@@ -17,4 +17,5 @@ Task.prototype.render = function() {
 
     return $('<li>').append([$done, $title]);
 
+
 };
