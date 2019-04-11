@@ -6,7 +6,7 @@ beforeEach(() => {
 describe("Define done", () => {
 
     it("Define done false, false == false", () => {
-        expect(false).toBe(false);
+        expect(task.done).toBe(false);
     });
 
     it("Define done true, true == true", () => {
@@ -15,7 +15,7 @@ describe("Define done", () => {
     });
 
     it("Define done false, true not false", () => {
-        expect(false).not.toBe(true);
+        expect(task.done).not.toBe(true);
     });
 
 });
