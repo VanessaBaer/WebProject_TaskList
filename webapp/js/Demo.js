@@ -4,10 +4,6 @@ var taskList;
 
 $(function() {
 
-    // code placed here will be executed each time the page
-    // is rendered
-
-    // create a tasklist to display
     taskList = new TaskList();
     taskList.createTask("Setup todo list");
     taskList.createTask("Buy milk");
@@ -15,9 +11,17 @@ $(function() {
     taskList.createTask("Invite guests");
     taskList.tasks[0].done = true;
 
-    // TODO: add rendered markup ot the tasklist to the container #taskList
-
-
     console.log('Application successfully initialized');
+
+    if (window.location.hash.length > 16) {
+        TaskList.load(window.location.hash.substring(1), function(tl) {
+            taskList = tl;
+            $('#tasks').html(taskList.render());
+        });
+    } else {
+        taskList = new TaskList();
+        taskList.createTask('');
+        $('#tasks').html(taskList.render());
+    }
 
 });
