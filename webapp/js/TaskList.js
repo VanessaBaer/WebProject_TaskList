@@ -11,6 +11,10 @@ TaskList.prototype.createTask = function(title) {
 };
 
 TaskList.prototype.render = function() {
-    // TODO implement tasklist rendering
-    return $('');
+    var $markup = $('<ul>');
+    var _i;
+    for (_i = 0; _i < this.tasks.length; _i += 1) {
+        $markup.append(this.tasks[_i].render());
+    }
+    return $markup;
 };
