@@ -9,3 +9,8 @@ TaskList.prototype.createTask = function(title) {
     this.tasks.push(task);
     return task;
 };
+
+TaskList.prototype.render = function() {
+    // TODO implement tasklist rendering
+    return $('');
+};
