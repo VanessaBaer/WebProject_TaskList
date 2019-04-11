@@ -32,4 +32,30 @@ describe("Initial object", () => {
     });
 
 
+    describe("render", function() {
+        it("renders an li element", function() {
+            var $markup = task.render();
+            expect($markup).toEqual('li');
+        });
+        it("renders an unchecked checkbox", function() {
+            var $markup = task.render();
+            expect($markup.find('input[name=done]')).not.toBeChecked();
+        });
+        it("renders an empty input field", function() {
+            var $markup = task.render();
+            expect($markup.find('input[name=title]')).toHaveValue('')
+        });
+        it("checks the checkbox when done", function() {
+            task.done = true;
+            var $markup = task.render();
+            expect($markup.find('input[name=done]')).toBeChecked();
+        });
+        it("renders an the title", function() {
+            task.title = 'task title';
+            var $markup = task.render();
+            expect($markup.find('input[name=title]')).toHaveValue('task title');
+        });
+    });
+
+
 });
