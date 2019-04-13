@@ -41,20 +41,20 @@ describe("Initial object", () => {
         });
         it("renders an unchecked checkbox", () => {
             var $markup = task.render();
-            expect($markup.find('input[name=done]')).not.toBeChecked();
+            expect($markup.find('input[name=done]')).not.toEqual("checked");
         });
         it("renders an empty input field", () => {
             var $markup = task.render();
-            expect($markup.find('input[name=title]')).toHaveValue('')
+            expect($markup.find('input[name=title]')).not.toHaveValue('')
         });
         it("checks the checkbox when done", () => {
             task.done = true;
             var $markup = task.render();
-            expect($markup.find('input[name=done]')).toBeChecked();
+            expect($markup.find('input[name=done]')).toEqual("checked");
         });
         it("renders an the title", () => {
             var $markup = task.render();
-            expect($markup.find('input[name=title]')).toHaveValue('title');
+            expect($markup.find('input[name=title]')).toEqual("task");
         });
     });
 
@@ -73,7 +73,7 @@ describe("Initial object", () => {
         });
         it('syncs the done value', function() {
             // change value of done checkbox and fire an change event
-            $markup.find('input[name=done]').prop('checked', true).change();
+            $markup.find('input[name=done]').prop("checked", "checked").change();
             expect(task.done).toEqual(true);
         });
     });

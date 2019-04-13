@@ -2,31 +2,24 @@
 
 var taskList;
 
-$(function() {
+jQuery(function() {
+    taskList = new TaskList('My Tasks', '#tasks');
+    taskList.createTask("Setup todo list");
+    taskList.createTask("Buy milk");
+    taskList.createTask("Read recipe");
+    taskList.createTask("Invite guests");
+    taskList.tasks[0].setDone(true);
 
-        taskList = new TaskList();
-        taskList.createTask("Setup todo list");
-        taskList.createTask("Buy milk");
-        taskList.createTask("Read recipe");
-        taskList.createTask("Invite guests");
-        taskList.tasks[0].done = true;
+    jQuery('#newTask').click(function() {
+        taskList.createTask('');
+    });
 
-        $('#newTask').click(function(event) {
-                event.preventDefault();
-                var task = taskList.createTask('');
-                $('#tasks ul').append(task.render());
-        });
+    jQuery('#saveTasks').click(function() {
+        TaskListRepository.save(taskList);
+    });
 
-        $('#saveTasks').click(function(event) {
-                taskList.save();
-        });
-
-        $('#tasks').append(taskList.render());
-
-        $(':checkbox').on('change', function() {
-                // all related code goes in here
-                console.log('change event triggered');
-        });
-
-
+    jQuery('#loadTasks').click(function() {
+        var tasks = TaskList.createTasksFromTasksJson(TaskListRepository.findFirstTasksJson());
+        taskList.setTasks(tasks);
+    });
 });

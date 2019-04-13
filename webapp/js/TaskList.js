@@ -1,7 +1,8 @@
-function TaskList(title) {
-    this.tasks = [];
-    this.id = null;
-    this.title = title || "";
+function TaskList(title, containerCssSelector, tasks) {
+    this.tasks = (tasks === undefined ? [] : tasks);
+    this.title = title;
+    this.containerCssSelector = containerCssSelector;
+    this.render();
 }
 
 TaskList.prototype.size = function() {
@@ -9,19 +10,32 @@ TaskList.prototype.size = function() {
 };
 
 TaskList.prototype.createTask = function(title) {
-    var _task = new Task(title);
-    this.tasks.push(_task);
-    return _task;
+    var task = new Task(title);
+    this.tasks.push(task);
+    jQuery(this.containerCssSelector).append(task.render());
 };
 
-TaskList.prototype.save = function () {
+TaskList.prototype.setTasks = function(tasks) {
+    this.tasks = tasks;
+    this.render();
+};
+
+TaskList.createTasksFromTasksJson = function(tasksJson) { //used later to create taskList from cookie
+    return tasksJson.map(function(taskJson) {
+        return Task.fromJson(taskJson);
+    });
+};
+
+TaskList.prototype.createTasksJson = function() {
+    return this.tasks.map(function(task) {
+        return task.toJson();
+    });
 };
 
 TaskList.prototype.render = function() {
-    var $tasks = [];
-    for (var i = 0; i < this.tasks.length; i++) {
-        $tasks.push(this.tasks[i].render());
+    var tasks = [];
+    for (var index in this.tasks) {
+        tasks.push(this.tasks[index].render());
     }
-
-    return $('<ul>').append($tasks);
+    return jQuery(this.containerCssSelector).html(tasks).prepend('<h1>' + this.title + '</h1>');
 };
