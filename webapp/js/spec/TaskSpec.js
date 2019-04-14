@@ -1,19 +1,17 @@
 
 beforeEach(() => {
     task = new Task("task");
-    task.done = false;
 });
 
 describe("Define done", () => {
 
-    it("Define done false, false == false", () => {
+    it("Define done false, false === false", () => {
         expect(task.done).toBe(false);
     });
 
-    it("Define done true, true == true", () => {
-        task3 = new Task("task3");
-        task3.done = true;
-        expect(true).toBe(true);
+    it("Define done true, true === true", () => {
+        task2 = new Task("task2", true);
+        expect(task2.done).toBe(true);
     });
 
     it("Define done false, true not false", () => {
@@ -29,54 +27,50 @@ describe("Initial object", () => {
     });
 
     it("Check if task not is equal to task2 ", () => {
-        task2 = new Task(false, "task2");
-        expect(task2.title).not.toEqual(task.title);
+        task3 = new Task("task3");
+        expect(task3.title).not.toEqual(task.title);
+    });
+});
+
+
+
+describe ("setDone", function () {
+
+    it("Sets done true, check if it is true", function () {
+        task.setDone(true);
+        expect(task.done).toEqual(true);
     });
 
-
-    describe("render", () => {
-        it("renders an li element", () => {
-            var $markup = task.render();
-            expect($markup).toEqual('li');
-        });
-        it("renders an unchecked checkbox", () => {
-            var $markup = task.render();
-            expect($markup.find('input[name=done]')).not.toEqual("checked");
-        });
-        it("renders an empty input field", () => {
-            var $markup = task.render();
-            expect($markup.find('input[name=title]')).not.toHaveValue('')
-        });
-        it("checks the checkbox when done", () => {
-            task.done = true;
-            var $markup = task.render();
-            expect($markup.find('input[name=done]')).toEqual("checked");
-        });
-        it("renders an the title", () => {
-            var $markup = task.render();
-            expect($markup.find('input[name=title]')).toEqual("task");
-        });
+    it("Sets done false, check if it is false", function () {
+        task.setDone(false);
+        expect(task.done).toEqual(false);
     });
 
-    describe("syncs the model with its markup", function() {
-        var $markup;
-        beforeEach(function() {
-            $markup = task.render();
-        });
-        it('adds itself as data to the markup', function() {
-            expect($markup.data('task')).toEqual(task);
-        });
-        it('syncs the title value', function() {
-            // change value of title input and fire an change event
-            $markup.find('input[name=title]').val('changed title').change();
-            expect(task.title).toEqual('changed title');
-        });
-        it('syncs the done value', function() {
-            // change value of done checkbox and fire an change event
-            $markup.find('input[name=done]').prop("checked", "checked").change();
-            expect(task.done).toEqual(true);
-        });
+    it("Sets done false, check if checkbox is unchecked", function () {
+        task.setDone(true);
+        expect(task.doneCheckbox.is(':checked')).toEqual(true);
     });
-
 
 });
+
+describe ("setTitle", function () {
+    it("Sets title, check if title is equal", function () {
+        task.setTitle("newTitle");
+        expect(task.title).toEqual("newTitle");
+    });
+});
+
+describe ("render", function () {
+
+    it("renders unchecked checkbox", function () {
+        task.setDone(false);
+        expect(task.doneCheckbox.is(':checked')).toEqual(false);
+    });
+
+    it("renders checked checkbox", function () {
+        task.setDone(true);
+        expect(task.doneCheckbox.is(':checked')).toEqual(true);
+    });
+
+});
+

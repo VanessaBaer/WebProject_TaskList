@@ -10,7 +10,7 @@ function Task(title, done) {
     });
     this.titleInput.val(this.title);
     this.titleInput.on('change keyUp', function(event) {
-        setTimeout(function() { that.setTitle(event.target.value); }, 100);
+    that.setTitle(event.target.value);
     });
 
     this.doneCheckbox = jQuery('<input>', {
