@@ -14,9 +14,14 @@ describe("Initial object", () => {
         taskList2 = new Task("taskList2");
         expect(taskList2.title).not.toEqual(taskList.title);
     });
-    it("adds a new element", function() {
+    it("Adds a new element", function() {
         expect(taskList.tasks[0].title).toEqual("task");
     });
 
+    it("Check if taskList is not null", function ()  {
+        expect(taskList2).not.toEqual(null);
+    });
 
 });
+
+

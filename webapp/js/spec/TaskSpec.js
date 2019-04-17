@@ -58,6 +58,11 @@ describe ("setTitle", function () {
         task.setTitle("newTitle");
         expect(task.title).toEqual("newTitle");
     });
+
+    it("Set title, check if it is not equal", function () {
+        task.setTitle("newTitle2");
+        expect(task.title).not.toEqual("title");
+    });
 });
 
 describe ("render", function () {
