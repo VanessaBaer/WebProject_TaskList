@@ -19,7 +19,7 @@ describe("Initial object", () => {
     });
 
     it("Check if taskList is not null", function ()  {
-        expect(taskList2).not.toEqual(null);
+        expect(taskList).not.toEqual(null);
     });
 
 });
