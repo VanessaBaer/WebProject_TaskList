@@ -11,6 +11,6 @@ describe("Save", () => {
             {title: "Foo", done: false},
             {title: "Bar", done: true},
         ];
-        expect(TaskListRepository.findFirstTasksJson()).toEqual(expectedTasksJson);
+        expect(TaskListRepository.findTasksJsonById()).toEqual(expectedTasksJson);
     });
 });

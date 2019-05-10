@@ -1,9 +1,14 @@
-function TaskList(title, containerCssSelector, tasks) {
+function TaskList(title, containerCssSelector, tasks, id) {
     this.tasks = (tasks === undefined ? [] : tasks);
     this.title = title;
+    this.id = id;
     this.containerCssSelector = containerCssSelector;
     this.render();
 }
+
+TaskList.prototype.getId = function() {
+    return this.id;
+};
 
 TaskList.prototype.size = function() {
     return this.tasks.length;
@@ -15,12 +20,12 @@ TaskList.prototype.createTask = function(title) {
     jQuery(this.containerCssSelector).append(task.render());
 };
 
-TaskList.prototype.setTasks = function(tasks) {
-    this.tasks = tasks;
+TaskList.prototype.setTasksFromTasksJson = function(tasksJson) {
+    this.tasks = TaskList.createTasksFromTasksJson(tasksJson);
     this.render();
 };
 
-TaskList.createTasksFromTasksJson = function(tasksJson) { //used later to create taskList from cookie
+TaskList.createTasksFromTasksJson = function(tasksJson) {
     return tasksJson.map(function(taskJson) {
         return Task.fromJson(taskJson);
     });

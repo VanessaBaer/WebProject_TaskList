@@ -1,16 +1,28 @@
 function TaskListRepository() {}
 
-TaskListRepository.save = function(taskList) {
-    var taskListDataString = JSON.stringify(taskList.createTasksJson());
-    document.cookie = 'taskList=' + taskListDataString + '; expires=Thu, 01 Jan 2030 12:00:00 UTC';
+TaskListRepository.saveTaskListById = function(taskList, onSuccess) {
+    jQuery.ajax({
+        type: 'POST',
+        url: 'http://zhaw.herokuapp.com/task_lists/' + (taskList.getId() ? taskList.getId() : ''),
+        data: JSON.stringify({tasks: taskList.createTasksJson()}),
+        success: function(responseData) {
+            var taskListId = responseData.id;
+            onSuccess(taskListId);
+        },
+        dataType: 'json'
+    });
 };
 
-TaskListRepository.findFirstTasksJson = function() {
-    var value = "; " + document.cookie;
-    var parts = value.split("; taskList=");
-    var taskListDataString = (parts.length === 2 ? parts.pop().split(";").shift() : undefined);
-    if(taskListDataString === undefined) {
-        return undefined;
-    }
-    return JSON.parse(taskListDataString);
+TaskListRepository.findTasksById = function(taskListId, onSuccess) {
+    jQuery.get({
+        url: 'http://zhaw.herokuapp.com/task_lists/' + taskListId,
+        data: JSON.stringify({id: taskListId}),
+        success: function (jsonResponse) {
+            onSuccess(jsonResponse.tasks);
+        },
+        dataType: 'json'
+    });
 };
+
+
+
